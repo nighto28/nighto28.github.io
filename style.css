@@ -42,6 +42,11 @@ body {
 #flag {
     width: 20px;
     height: 40px;
-    background-color: red;
+    background-color: orange;
+    position: absolute;
+}
+
+
+.spike {
     position: absolute;
 }
