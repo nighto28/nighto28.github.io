@@ -73,7 +73,8 @@ function gameLoop() {
         playerRect.top < flagRect.bottom
     ) {
         // Player has reached the flag
-        window.location.href = '';
+        window.location.href = 'lvl3.html'
+        levelComplete();
     }
 
 spike.style.left = `${parseInt(spike.getAttribute("data-x")) || 200}px`;
