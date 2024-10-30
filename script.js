@@ -71,7 +71,8 @@ function gameLoop() {
         playerRect.top < flagRect.bottom
     ) {
         // Player has reached the flag
-        window.location.href = 'lvl2.html';
+        window.location.href = 'lvl2.html'
+        levelComplete();
     }
 
   // Detect platform collisions to land on platforms
