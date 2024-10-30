@@ -113,17 +113,21 @@ border-radius: 0px;
 }
 
 .level-btn {
-  width: 220px;
-  height: 57px;
-  font-size: 20px;
+  display: block;
+  width: 100%;
+  margin: 10px 0;
+  padding: 10px;
+  font-size: 24px;
+  font-family: 'Chakra Petch', sans-serif;
   color: white;
-  background: none;
+  background: #555;
   border: 2px solid white;
   cursor: pointer;
-  margin: 10px;
 }
 
-.locked {
-  opacity: 0.5;
+.level-btn.locked {
+  color: #777;
+  background: #333;
+  border: 2px dashed #777;
   cursor: not-allowed;
 }
