@@ -3,10 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ceramic</title>
+  <title>Simple Platformer</title>
   <link rel="stylesheet" href="style.css">
+  <script src="scriptlvl.js"></script>
+<script>
+  function levelComplete() {
+    unlockNextLevel(2); // Change 1 to the current level number
+    alert("Level Complete! Next Level Unlocked.");
+  }
+
+</script>
+
 </head>
 <body>
+    <a href="index.html">
+    <button id="btnmenu">Menu</button>
+</a>
   <div id="game-container">
     <div id="player"></div>
     <div class="platform" style="bottom: 20px; left: 20px; width: 200px;"></div>
