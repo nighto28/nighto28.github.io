@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Simple Platformer</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <a href="index.html">
+    <button id="btnmenu">Menu</button>
+</a>
+  <div id="game-container">
+    <div id="player"></div>
+    <div class="platform" style="bottom: 20px; left: -20px; width: 80px;"></div>
+    <div class="platform" style="bottom: 400px; left: 500px; width: 100px;"></div>
+    <div class="platform" style="bottom: 40px; left: 300px; width: 1px;"></div>
+    <div id="flag" style="left: 0px; top: 417px;"></div>
+     <svg id="spike" class="spike" width="34" height="34" data-x="390" data-y="464">
+        <polygon points="17,0 0,34 34,34" fill="red" />
+    </svg>
+  </div>
+  <script src="script3.js"></script>
+</body>
+</html>
