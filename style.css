@@ -7,6 +7,34 @@ vertical-align: middle;
 line-height: 80px; /* The same as your div height */
 }
 
+#btnmenu {
+   position: absolute; /* or relative, fixed, sticky */
+  top: 330px; /* distance from the top of the containing element */
+  left: 0px; /* distance from the left of the containing element */
+  width:220px;
+  height:57px;
+  font-size:39px;
+  font-family: Chakra Petch;
+  color:white;
+  background:none;
+  border:2px solid white;
+  cursor:pointer;
+}
+
+#btn2 {
+   position: absolute; /* or relative, fixed, sticky */
+  top: 330px; /* distance from the top of the containing element */
+  left: 190px; /* distance from the left of the containing element */
+  width:220px;
+  height:57px;
+  font-size:39px;
+  font-family: Chakra Petch;
+  color:white;
+  background:none;
+  border:2px solid white;
+  cursor:pointer;
+}
+
 #btn1{
   position: absolute; /* or relative, fixed, sticky */
   top: 230px; /* distance from the top of the containing element */
@@ -82,4 +110,20 @@ border-radius: 0px;
 
 .spike {
     position: absolute;
+}
+
+.level-btn {
+  width: 220px;
+  height: 57px;
+  font-size: 20px;
+  color: white;
+  background: none;
+  border: 2px solid white;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.locked {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
