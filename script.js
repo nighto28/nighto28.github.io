@@ -17,7 +17,7 @@ const jumpStrength = 15;
 const moveSpeed = 0.5;
 const maxSpeed = 5;
 const friction = 0.9;
-const landingThreshold = 5; // Sensitivity threshold for landing
+const landingThreshold = 7; // Sensitivity threshold for landing
 
 // Track which keys are currently pressed
 const keys = {};
