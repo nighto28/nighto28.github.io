@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Simple Platformer</title>
   <link rel="stylesheet" href="style.css">
+    <script src="scriptlvl.js"></script>
+<script>
+  function levelComplete() {
+    unlockNextLevel(3); // Change 1 to the current level number
+  }
+
+</script>
 </head>
 <body>
   <a href="index.html">
@@ -12,13 +19,11 @@
 </a>
   <div id="game-container">
     <div id="player"></div>
-    <div class="platform" style="bottom: 20px; left: -20px; width: 80px;"></div>
+    <div class="platform" style="bottom: 20px; left: -20px; width: 95px;"></div>
     <div class="platform" style="bottom: 400px; left: 500px; width: 100px;"></div>
-    <div class="platform" style="bottom: 40px; left: 300px; width: 1px;"></div>
+    <div class="platform" style="bottom: 40px; left: 350px; width: 0.1px;"></div>    
     <div id="flag" style="left: 0px; top: 417px;"></div>
-     <svg id="spike" class="spike" width="34" height="34" data-x="390" data-y="464">
-        <polygon points="17,0 0,34 34,34" fill="red" />
-    </svg>
+    <div id="block" style="left: 0px; top: 484px;"></div>
   </div>
   <script src="script3.js"></script>
 </body>
