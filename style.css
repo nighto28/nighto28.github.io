@@ -10,7 +10,7 @@ line-height: 80px; /* The same as your div height */
 #btnmenu {
    position: absolute; /* or relative, fixed, sticky */
   top: 330px; /* distance from the top of the containing element */
-  left: 0px; /* distance from the left of the containing element */
+  left: 300px; /* distance from the left of the containing element */
   width:220px;
   height:57px;
   font-size:39px;
@@ -107,6 +107,12 @@ border-radius: 0px;
     position: absolute;
 }
 
+#block {
+    width: 600px;
+    height: 15px;
+    background-color: red;
+    position: absolute;
+}
 
 .spike {
     position: absolute;
