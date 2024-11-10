@@ -9,8 +9,8 @@ line-height: 80px; /* The same as your div height */
 
 #btnmenu {
    position: absolute; /* or relative, fixed, sticky */
-  top: 330px; /* distance from the top of the containing element */
-  left: 20px; /* distance from the left of the containing element */
+  top: 130px; /* distance from the top of the containing element */
+  left: 0px; /* distance from the left of the containing element */
   width:220px;
   height:57px;
   font-size:39px;
@@ -23,7 +23,7 @@ line-height: 80px; /* The same as your div height */
 
 #btn2 {
    position: absolute; /* or relative, fixed, sticky */
-  top: 330px; /* distance from the top of the containing element */
+  top: 290px; /* distance from the top of the containing element */
   left: 190px; /* distance from the left of the containing element */
   width:220px;
   height:57px;
@@ -37,7 +37,7 @@ line-height: 80px; /* The same as your div height */
 
 #btn1{
   position: absolute; /* or relative, fixed, sticky */
-  top: 230px; /* distance from the top of the containing element */
+  top: 195px; /* distance from the top of the containing element */
   left: 190px; /* distance from the left of the containing element */
   width:220px;
   height:57px;
@@ -47,6 +47,66 @@ line-height: 80px; /* The same as your div height */
   background:none;
   border:2px solid white;
   cursor:pointer;
+}
+
+#btn3{
+  position: absolute; /* or relative, fixed, sticky */
+  top: 385px; /* distance from the top of the containing element */
+  left: 190px; /* distance from the left of the containing element */
+  width:220px;
+  height:57px;
+  font-size:39px;
+  font-family: Chakra Petch;
+  color:white;
+  background:none;
+  border:2px solid white;
+  cursor:pointer;
+}
+
+img {
+  position: absolute;
+  top: -17px; /* distance from the top of the containing element */
+  right: -7px;
+    height: 130px;  
+    width: 130px;
+  padding:20px;
+  background-position: center;
+}
+
+#btn5{
+position: absolute;
+  top: 50px; /* distance from the top of the containing element */
+  right: 30px; 
+  width:120px;
+  height:100px;
+   border:2px solid white;
+  background:none;
+  cursor:pointer;
+  background-position: center;
+}
+
+#btn4{
+position: absolute;
+  top: 200px; /* distance from the top of the containing element */
+  right: 30px; 
+  width:120px;
+  height:100px;
+   border:2px solid white;
+  background:none;
+  cursor:pointer;
+  background-position: center;
+}
+
+#btn6{
+position: absolute;
+  top: 400px; /* distance from the top of the containing element */
+  right: 30px; 
+  width:300px;
+  height:50px;
+   border:2px solid white;
+  background:none;
+  cursor:pointer;
+  background-position: center;
 }
 
 * {
@@ -66,13 +126,48 @@ body {
 #game-box {
 position: absolute;
 border-radius: 0px;
-  top: 100px;
+  top: 70px;
   right: 150px;
   width: 300px;
   height: 80px;
   border: 2px solid #fff;
   background-color: #333;
   overflow: hidden;
+}
+
+#rage {
+position: absolute;
+border-radius: 0px;
+  top: 20px;
+  right: 210px;
+  width: 350px;
+  height: 150px;
+  border: 2px solid #fff;
+  background-color: #333;
+  overflow: hidden;
+  margin: 10px;
+}
+
+#rage2 {
+position: absolute;
+border-radius: 0px;
+  top: 200px;
+  right: 190px;
+  width: 370px;
+  height: 100px;
+  border: 2px solid #fff;
+  background-color: #333;
+  overflow: hidden;
+  margin: 10px;
+}
+
+#title2 {
+  color: white;
+  font-size: 40px;
+  font-family: Chakra Petch;
+  text-align: center;
+vertical-align: middle;
+line-height: 47px; /* The same as your div height */
 }
 
 #game-container {
@@ -82,6 +177,37 @@ border-radius: 0px;
   border: 2px solid #fff;
   background-color: #333;
   overflow: hidden;
+}
+
+
+#sprite{
+  position: absolute;
+  transform: rotate(2deg);
+  bottom: 340px;
+  left: 50px;
+  width: 45px;
+  height: 45px;
+  background-color: #4CAF50;
+}
+
+#sprite2{
+  position: absolute;
+  transform: rotate(-2deg);
+  bottom: 340px;
+  left: 500px;
+  width: 45px;
+  height: 45px;
+  background-color: red;
+}
+
+#sprite3{
+  position: absolute;
+  bottom: 100px;
+    transform: rotate(1deg);
+  left: 70px;
+  width: 40px;
+  height: 80px;
+  background-color: orange;
 }
 
 #player {
@@ -107,24 +233,17 @@ border-radius: 0px;
     position: absolute;
 }
 
-#block {
-    width: 600px;
-    height: 15px;
-    background-color: red;
-    position: absolute;
-}
-
 .spike {
     position: absolute;
 }
 
 .level-btn {
   display: block;
-  width: 100%;
-  margin: 10px 0;
+  width: 90%;
+  margin: 30px 30px;
   padding: 10px;
   font-size: 24px;
-  font-family: 'Chakra Petch', sans-serif;
+  font-family: Chakra Petch;
   color: white;
   background: #555;
   border: 2px solid white;
@@ -133,6 +252,7 @@ border-radius: 0px;
 
 .level-btn.locked {
   color: #777;
+    font-family: Chakra Petch;
   background: #333;
   border: 2px dashed #777;
   cursor: not-allowed;
