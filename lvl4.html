@@ -1,1 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ceramic</title>
+  <link rel="stylesheet" href="style.css">
+    <script src="scriptlvl.js"></script>
+<script>
+  function levelComplete() {
+    unlockNextLevel(4); // Change 1 to the current level number
+  }
 
+</script>
+</head>
+<body>
+  <a href="index.html">
+    <button id="btnmenu">Menu</button>
+</a>
+  <div id="game-container">
+    <div id="player"></div>
+    <div class="platform" style="bottom: 400px; left: 260px; width: 80px;"></div>
+    <div class="platform" style="bottom: 100px; left: 300px; width: 0.1px;"></div>
+        <div class="platform" style="bottom: 240px; left: 110px; width: 0.1px;"></div>
+                <div class="platform" style="bottom: 240px; left: 490px; width: 0.1px;"></div>
+    <div class="platform" style="bottom: 0px; left: -10px; width: 690px;"></div>    
+    <div id="flag" style="left: 290px; top: 36px;"></div>
+    <div id="block" style="left: 0px; top: 200000px;"></div>
+  </div>
+  <script src="script4.js"></script>
+</body>
+</html>
