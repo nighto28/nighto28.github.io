@@ -2,9 +2,9 @@
 
 const player = document.getElementById("player");
 const platforms = Array.from(document.getElementsByClassName("platform"));
+const spikes = Array.from(document.getElementsByClassName("spike"));
 const gameContainer = document.getElementById("game-container");
 const flag = document.getElementById("flag");
-const spike = document.getElementById("spike");
 
 let playerX = 530;
 let playerY = 40;
@@ -38,6 +38,24 @@ document.addEventListener("keyup", (event) => {
   keys[event.key] = false;
 });
 
+// Helper function for collision detection
+function isColliding(rect1, rect2) {
+  return (
+    rect1.right > rect2.left &&
+    rect1.left < rect2.right &&
+    rect1.bottom > rect2.top &&
+    rect1.top < rect2.bottom
+  );
+}
+
+// Function to reset player position after hitting a spike
+function resetPlayerPosition() {
+  playerX = 530; // Starting X position
+  playerY = 40;  // Starting Y position
+  playerVelocityX = 0;
+  playerVelocityY = 0;
+}
+
 // Game loop
 function gameLoop() {
   // Check if arrow keys are pressed and apply horizontal velocity
@@ -58,41 +76,13 @@ function gameLoop() {
     playerVelocityX *= friction;
   }
 
-
   // Update position with calculated velocities
   playerY += playerVelocityY;
   playerX += playerVelocityX;
 
-   const flagRect = flag.getBoundingClientRect();
-    const playerRect = player.getBoundingClientRect();
-
-    if (
-        playerRect.right > flagRect.left &&
-        playerRect.left < flagRect.right &&
-        playerRect.bottom > flagRect.top &&
-        playerRect.top < flagRect.bottom
-    ) {
-        // Player has reached the flag
-        window.location.href = 'lvl4.html'
-        levelComplete();
-    }
-
-   const blockRect = block.getBoundingClientRect();
-   
-    if (
-        playerRect.right > blockRect.left &&
-        playerRect.left < blockRect.right &&
-        playerRect.bottom > blockRect.top &&
-        playerRect.top < blockRect.bottom
-    ) {
-        window.location.href = 'lvl3.html';
-    }
-
-
-
   // Detect platform collisions to land on platforms
   isGrounded = false; // Reset grounded status for each frame
-platforms.forEach(platform => {
+  platforms.forEach(platform => {
     const platformRect = platform.getBoundingClientRect();
     const playerRect = player.getBoundingClientRect();
 
@@ -119,32 +109,27 @@ platforms.forEach(platform => {
       playerY = Math.min(playerY, platformRect.bottom + 2); // Slightly below platform
       playerVelocityY *= -0.2; // Gentle downward stop
     }
+  });
 
-    // Detect collision with the left side of the platform
-    if (
-      playerRect.bottom > platformRect.top && // Within vertical bounds
-      playerRect.top < platformRect.bottom &&
-      playerRect.right > platformRect.left && // Overlapping platform's left side
-      Math.abs(playerRect.right - platformRect.left) <= 10 && // Within buffer zone
-      playerVelocityX > 0 // Moving right
-    ) {
-      playerX -= 3; // Adjust position gradually
-      playerVelocityX *= 0; // Reduce velocity to slow down
+  // Spike collision detection
+  spikes.forEach(spike => {
+    const spikeRect = spike.getBoundingClientRect();
+    const playerRect = player.getBoundingClientRect();
+
+    if (isColliding(playerRect, spikeRect)) {
+      resetPlayerPosition();
+      return; // Exit to prevent further movement
     }
+  });
 
-    // Detect collision with the right side of the platform
-    if (
-      playerRect.bottom > platformRect.top && // Within vertical bounds
-      playerRect.top < platformRect.bottom &&
-      playerRect.left < platformRect.right && // Overlapping platform's right side
-      Math.abs(playerRect.left - platformRect.right) <= 10 && // Within buffer zone
-      playerVelocityX < 0 // Moving left
-    ) {
-      playerX += 3; // Adjust position gradually
-      playerVelocityX *= 0; // Reduce velocity to slow down
-    }
-});
-
+  // Check for flag collision
+  const flagRect = flag.getBoundingClientRect();
+  const playerRect = player.getBoundingClientRect();
+  if (isColliding(playerRect, flagRect)) {
+    // Player has reached the flag
+    window.location.href = 'lvl4.html'
+    levelComplete();
+  }
 
   // Prevent falling through the bottom of the game container
   if (playerY + player.clientHeight >= gameContainer.clientHeight) {
