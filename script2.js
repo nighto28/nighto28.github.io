@@ -2,12 +2,12 @@
 
 const player = document.getElementById("player");
 const platforms = Array.from(document.getElementsByClassName("platform"));
+const spikes = Array.from(document.getElementsByClassName("spike"));
 const gameContainer = document.getElementById("game-container");
 const flag = document.getElementById("flag");
-const spike = document.getElementById("spike");
 
 let playerX = 50;
-let playerY = 430;
+let playerY = 420;
 let playerVelocityX = 0;
 let playerVelocityY = 0;
 let isGrounded = false;
@@ -18,7 +18,7 @@ const jumpStrength = 15;
 const moveSpeed = 0.5;
 const maxSpeed = 5;
 const friction = 0.9;
-const landingThreshold = 5; // Sensitivity threshold for landing
+const landingThreshold = 7; // Sensitivity threshold for landing
 
 // Track which keys are currently pressed
 const keys = {};
@@ -37,6 +37,24 @@ document.addEventListener("keydown", (event) => {
 document.addEventListener("keyup", (event) => {
   keys[event.key] = false;
 });
+
+// Helper function for collision detection
+function isColliding(rect1, rect2) {
+  return (
+    rect1.right > rect2.left &&
+    rect1.left < rect2.right &&
+    rect1.bottom > rect2.top &&
+    rect1.top < rect2.bottom
+  );
+}
+
+// Function to reset player position after hitting a spike
+function resetPlayerPosition() {
+  playerX = 50; // Starting X position
+  playerY = 420;  // Starting Y position
+  playerVelocityX = 0;
+  playerVelocityY = 0;
+}
 
 // Game loop
 function gameLoop() {
@@ -58,58 +76,13 @@ function gameLoop() {
     playerVelocityX *= friction;
   }
 
-
   // Update position with calculated velocities
   playerY += playerVelocityY;
   playerX += playerVelocityX;
 
-   const flagRect = flag.getBoundingClientRect();
-    const playerRect = player.getBoundingClientRect();
-
-    if (
-        playerRect.right > flagRect.left &&
-        playerRect.left < flagRect.right &&
-        playerRect.bottom > flagRect.top &&
-        playerRect.top < flagRect.bottom
-    ) {
-        // Player has reached the flag
-        window.location.href = 'lvl3.html'
-        levelComplete();
-    }
-
-spike.style.left = `${parseInt(spike.getAttribute("data-x")) || 200}px`;
-spike.style.top = `${parseInt(spike.getAttribute("data-y")) || 300}px`;
-
-function isPointInTriangle(px, py, ax, ay, bx, by, cx, cy) {
-    const areaOrig = Math.abs((bx - ax) * (cy - ay) - (cx - ax) * (by - ay));
-    const area1 = Math.abs((ax - px) * (by - py) - (bx - px) * (ay - py));
-    const area2 = Math.abs((bx - px) * (cy - py) - (cx - px) * (by - py));
-    const area3 = Math.abs((cx - px) * (ay - py) - (ax - px) * (cy - py));
-    return areaOrig === area1 + area2 + area3;
-}
-
-   // Spike's triangular vertices based on its position and size
-    const spikeRect = spike.getBoundingClientRect();
-    const ax = spikeRect.left + 30; // Peak of the triangle
-    const ay = spikeRect.top;
-    const bx = spikeRect.left;
-    const by = spikeRect.bottom;
-    const cx = spikeRect.right;
-    const cy = spikeRect.bottom;
-
-    // Check if the player's bottom center point is within the triangle
-    const playerBottomCenterX = playerRect.left + playerRect.width / 2;
-    const playerBottomCenterY = playerRect.bottom;
-    const playerInTriangle = isPointInTriangle(playerBottomCenterX, playerBottomCenterY, ax, ay, bx, by, cx, cy);
-
-    // Spike collision: reset player if in triangle
-    if (playerInTriangle) {
-        window.location.href = 'lvl2.html';
-    }
-
   // Detect platform collisions to land on platforms
   isGrounded = false; // Reset grounded status for each frame
-platforms.forEach(platform => {
+  platforms.forEach(platform => {
     const platformRect = platform.getBoundingClientRect();
     const playerRect = player.getBoundingClientRect();
 
@@ -136,32 +109,27 @@ platforms.forEach(platform => {
       playerY = Math.min(playerY, platformRect.bottom + 2); // Slightly below platform
       playerVelocityY *= -0.2; // Gentle downward stop
     }
+  });
 
-    // Detect collision with the left side of the platform
-    if (
-      playerRect.bottom > platformRect.top && // Within vertical bounds
-      playerRect.top < platformRect.bottom &&
-      playerRect.right > platformRect.left && // Overlapping platform's left side
-      Math.abs(playerRect.right - platformRect.left) <= 10 && // Within buffer zone
-      playerVelocityX > 0 // Moving right
-    ) {
-      playerX -= 3; // Adjust position gradually
-      playerVelocityX *= 0; // Reduce velocity to slow down
+  // Spike collision detection
+  spikes.forEach(spike => {
+    const spikeRect = spike.getBoundingClientRect();
+    const playerRect = player.getBoundingClientRect();
+
+    if (isColliding(playerRect, spikeRect)) {
+      resetPlayerPosition();
+      return; // Exit to prevent further movement
     }
+  });
 
-    // Detect collision with the right side of the platform
-    if (
-      playerRect.bottom > platformRect.top && // Within vertical bounds
-      playerRect.top < platformRect.bottom &&
-      playerRect.left < platformRect.right && // Overlapping platform's right side
-      Math.abs(playerRect.left - platformRect.right) <= 10 && // Within buffer zone
-      playerVelocityX < 0 // Moving left
-    ) {
-      playerX += 3; // Adjust position gradually
-      playerVelocityX *= 0; // Reduce velocity to slow down
-    }
-});
-
+  // Check for flag collision
+  const flagRect = flag.getBoundingClientRect();
+  const playerRect = player.getBoundingClientRect();
+  if (isColliding(playerRect, flagRect)) {
+    // Player has reached the flag
+    window.location.href = 'lvl3.html'
+    levelComplete();
+  }
 
   // Prevent falling through the bottom of the game container
   if (playerY + player.clientHeight >= gameContainer.clientHeight) {
